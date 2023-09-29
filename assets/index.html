@@ -11,27 +11,64 @@
     <aside>
         <div id="left-container">
             <h2 id="search">Search a City:</h2>
-             <input placeholder="City"/>
-             <button>Search</button>
+             <input id="city-input" placeholder="E.g., New York, London, Juneau"/>
+             <button id="button">Search</button>
        </div>
        <div id="history"></div>
     </aside>
-    <article>
+    <article id="weather-data">
         <div id="today">
-            <h2>City<span id="date"></span></h2>
-            <ul>
-                <li>Temperature:<span id="temperature"></span></li>
-                <li>Wind:<span id="wind"></span></li>
-                <li>Humidity:<span id="humidity"></span></li>
-            </ul>
-        </div>
+            <div id=weather-details>
+                <h2>Columbus (2023-09-28)</h2>
+                <h4>Temperature: 76°F</h4>
+                <h4>Wind: 4 mph</h4>
+                <h4>Humidity: 20%</h4>
+            </div>
+                <div id="icon"><img src=https://openweathermap.org/img/wn/10d@4x.png alt= "weather-icon">
+                    <h4>Moderate Rain</h4>
+                </div>
+            </div>
         <div id="five-day">
-            <p id="forecast-1"></p>
-            <p id="forecast-2"></p>
-            <p id="forecast-3"></p>
-            <p id="forecast-4"></p>
-            <p id="forecast-5"></p>
-        </div>
+            <h2>5-day Forecast</h2>
+                <ul class="weather-cards">
+                    <li class="card">
+                        <h3>(2023-09-28)</h2>
+                        <img src=https://openweathermap.org/img/wn/10d@2x.png alt= "weather-icon">
+                        <h3>Temp: 76°F</h3>
+                        <h3>Wind: 4 mph</h3>
+                        <h3>Humidity: 20%</h3>
+                     </li>
+                     <li class="card">
+                        <h3>(2023-09-28)</h2>
+                        <img src=https://openweathermap.org/img/wn/10d@2x.png alt= "weather-icon">
+                        <h3>Temp: 76°F</h3>
+                        <h3>Wind: 4 mph</h3>
+                        <h3>Humidity: 20%</h3>
+                     </li>
+                     <li class="card">
+                        <h3>(2023-09-28)</h2>
+                        <img src=https://openweathermap.org/img/wn/10d@2x.png alt= "weather-icon">
+                        <h3>Temp: 76°F</h3>
+                        <h3>Wind: 4 mph</h3>
+                        <h3>Humidity: 20%</h3>
+                     </li>
+                     <li class="card">
+                        <h3>(2023-09-28)</h2>
+                        <img src=https://openweathermap.org/img/wn/10d@2x.png alt= "weather-icon">
+                        <h3>Temp: 76°F</h3>
+                        <h3>Wind: 4 mph</h3>
+                        <h3>Humidity: 20%</h3>
+                     </li>
+                     <li class="card">
+                        <h3>(2023-09-28)</h2>
+                        <img src=https://openweathermap.org/img/wn/10d@2x.png alt= "weather-icon">
+                        <h3>Temp: 76°F</h3>
+                        <h3>Wind: 4 mph</h3>
+                        <h3>Humidity: 20%</h3>
+                     </li>
+                </ul>
+        </div> 
     </article>
+    <script src="script.js"></script>
 </body>
 </html>
