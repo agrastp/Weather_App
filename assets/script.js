@@ -45,33 +45,32 @@ function renderCurrentWeather(data){
     dayOneIconCard.innerHTML = "<img src="+ dayOneWeatherIcon + ">";
     dayOneIconCard.appendChild(currentIcon);
 
-    setCityInStorage();
+    setCityInStorage()
 }
-
-function setCityInStorage(){
-
-}
-
 
 var fiveDayForecastCards = document.querySelector(".weather-cards");
 
 function renderFiveDayForcast(data){
-    
+    console.log(data)
             
     for (let i = 0; i < data.list.length; i += 8) {
                 var currentDayWeather = data.list[i];
                 var date = currentDayWeather.dt_txt.split(" ")[0];
                 var wind = currentDayWeather.wind.speed;
-                var weatherCondition = currentDayWeather.weather.description;
-                var weatherIcon = `https://openweathermap.org/img/wn/${currentDayWeather.weather.icon}@2x.png`;
+                var weatherCondition = currentDayWeather.weather[0].description;
+                console.log(weatherCondition)
+                var weatherIcon = `https://openweathermap.org/img/wn/${currentDayWeather.weather[0].icon}@2x.png`;
+                var weatherIconSrc = "<img src="+ weatherIcon + ">"
                 var temperature = currentDayWeather.main.temp;
                 var humidity = currentDayWeather.main.humidity; 
 
                 var fiveDays = document.createElement("div");
-                fiveDays.innerHTML = date + "<br> Temp: " + Math.round(temperature) + " °F <br> Wind: " + wind + " mph <br> Humidity: " + humidity + " %";
-                fiveDayForecastCards.appendChildren(fiveDays);
+                fiveDays.innerHTML = date + "<br> Temp: " + Math.round(temperature) + " °F <br> Wind: " + wind + " mph <br> Humidity: " + humidity + " % <br>" + weatherCondition + "<br><br>"+ weatherIconSrc;
+                fiveDayForecastCards.appendChild(fiveDays);
+                fiveDays.setAttribute("class", "card");
             }  
-}
+        }
+
 
 function getCityCoordinates() {
     var cityName = cityInput.value.trim();
@@ -90,7 +89,6 @@ function getCityCoordinates() {
             getWeatherDetails(name, lat, lon)
         }).catch(function (error) {
         });
-
 }
 
 
