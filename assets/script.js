@@ -1,7 +1,6 @@
 var searchBtn = document.getElementById("button");
 var cityInput = document.getElementById("city-input");
 var APIkey = "7d1a630efe515812d5181c337b746a9f";
-var listEl = document.getElementsByClassName("card");
 // var city;
 
 function getWeatherDetails(cityName, lat, lon) {
@@ -11,10 +10,54 @@ function getWeatherDetails(cityName, lat, lon) {
             return response.json();
         })
         .then(function (data) {
-            for (let i = 0; i < data.list.length; i += 8) {
+
+           renderCurrentWeather(data);
+           renderFiveDayForcast(data);
+        })
+        .catch(function () {
+            alert("An error occured while retriving your weather forecast!")
+        })
+}
+
+var dayOneWeatherCard = document.getElementById("weather-details");
+var dayOneIconCard = document.getElementById("icon-img");
+var dayOneWeatherConditionCard =document.getElementById("weather-condition");
+
+function renderCurrentWeather(data){
+    
+    var currentCity = data.city.name;
+    var dayOneDate = data.list[0].dt_txt.split(" ")[0];
+    var dayOneTemp = data.list[0].main.temp;
+    var dayOneWind = data.list[0].wind.speed;
+    var dayOneWeatherCondition = data.list[0].weather[0].description;
+    var dayOneWeatherIcon = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
+    var dayOneHumidity = data.list[0].main.humidity;
+  
+    const currentDayCard = document.createElement("p");
+    currentDayCard.innerHTML = currentCity+", \n" + dayOneDate + "<br> Temperature: " + Math.round(dayOneTemp) + " °F <br> Wind: " + dayOneWind + " mph <br> Humidity: " + dayOneHumidity + " %";
+    dayOneWeatherCard.appendChild(currentDayCard);
+
+    var currentWeatherCondition = document.createElement("p");
+    currentWeatherCondition.innerHTML = dayOneWeatherCondition;
+    dayOneWeatherConditionCard.appendChild(currentWeatherCondition);
+
+    var currentIcon = document.createElement("img");
+    dayOneIconCard.innerHTML = "<img src="+ dayOneWeatherIcon + ">";
+    dayOneIconCard.appendChild(currentIcon);
+
+    setCityInStorage();
+}
+
+function setCityInStorage();
+
+function renderFiveDayForcast(data){
+    console.log(data);
+            
+    for (let i = 0; i < data.list.length; i += 8) {
                 var currentDayWeather = data.list[i];
               
                 console.log(currentDayWeather);
+
                 var date = currentDayWeather.dt_txt.split(" ")[0];
                 var wind = currentDayWeather.wind.speed;
                 var weatherCondition = currentDayWeather.weather.description;
@@ -22,17 +65,9 @@ function getWeatherDetails(cityName, lat, lon) {
                 var temperature = currentDayWeather.main.temp;
                 var humidity = currentDayWeather.main.humidity; 
 
-                console.log(date);
-
             }
-        })
-        .catch(function () {
-            alert("An error occured while retriving your weather forecast!")
-        })
+    
 }
-
-
-
 
 function getCityCoordinates() {
     var cityName = cityInput.value.trim();
