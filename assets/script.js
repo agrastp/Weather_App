@@ -33,7 +33,7 @@ function renderCurrentWeather(data){
     var dayOneWeatherIcon = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
     var dayOneHumidity = data.list[0].main.humidity;
   
-    const currentDayCard = document.createElement("p");
+    var currentDayCard = document.createElement("p");
     currentDayCard.innerHTML = currentCity+", \n" + dayOneDate + "<br> Temperature: " + Math.round(dayOneTemp) + " °F <br> Wind: " + dayOneWind + " mph <br> Humidity: " + dayOneHumidity + " %";
     dayOneWeatherCard.appendChild(currentDayCard);
 
@@ -48,22 +48,28 @@ function renderCurrentWeather(data){
     setCityInStorage();
 }
 
-function setCityInStorage();
+function setCityInStorage(){
+
+}
+
+var fiveDayForecastCards = document.getElementsByClassName("card");
 
 function renderFiveDayForcast(data){
-    console.log(data);
+    
             
     for (let i = 0; i < data.list.length; i += 8) {
                 var currentDayWeather = data.list[i];
-              
-                console.log(currentDayWeather);
-
                 var date = currentDayWeather.dt_txt.split(" ")[0];
                 var wind = currentDayWeather.wind.speed;
                 var weatherCondition = currentDayWeather.weather.description;
                 var weatherIcon = `https://openweathermap.org/img/wn/${currentDayWeather.weather.icon}@2x.png`;
                 var temperature = currentDayWeather.main.temp;
                 var humidity = currentDayWeather.main.humidity; 
+
+                var fiveDayCards = document.createElement("p");
+                fiveDayCard.innerHTML = date + "<br> Temp: " + Math.round(temperature) + " °F <br> Wind: " + wind + " mph <br> Humidity: " + humidity + " %";
+                fiveDayCards.appendChildren(fiveDayCards);
+
 
             }
     
