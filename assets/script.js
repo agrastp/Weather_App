@@ -69,7 +69,7 @@ function renderFiveDayForcast(data){
                 var fiveDayCards = document.createElement("p");
                 fiveDayCard.innerHTML = date + "<br> Temp: " + Math.round(temperature) + " °F <br> Wind: " + wind + " mph <br> Humidity: " + humidity + " %";
                 fiveDayCards.appendChildren(fiveDayCards);
-
+                console.log(data.list);
 
             }
     
