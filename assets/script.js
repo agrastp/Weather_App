@@ -52,7 +52,8 @@ function setCityInStorage(){
 
 }
 
-var fiveDayForecastCards = document.getElementsByClassName("card");
+
+var fiveDayForecastCards = document.querySelector(".weather-cards");
 
 function renderFiveDayForcast(data){
     
@@ -66,13 +67,10 @@ function renderFiveDayForcast(data){
                 var temperature = currentDayWeather.main.temp;
                 var humidity = currentDayWeather.main.humidity; 
 
-                var fiveDayCards = document.createElement("p");
-                fiveDayCard.innerHTML = date + "<br> Temp: " + Math.round(temperature) + " °F <br> Wind: " + wind + " mph <br> Humidity: " + humidity + " %";
-                fiveDayCards.appendChildren(fiveDayCards);
-                console.log(data.list);
-
-            }
-    
+                var fiveDays = document.createElement("div");
+                fiveDays.innerHTML = date + "<br> Temp: " + Math.round(temperature) + " °F <br> Wind: " + wind + " mph <br> Humidity: " + humidity + " %";
+                fiveDayForecastCards.appendChildren(fiveDays);
+            }  
 }
 
 function getCityCoordinates() {
