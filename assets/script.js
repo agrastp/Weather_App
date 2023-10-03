@@ -1,4 +1,4 @@
-var cityBtn = document.querySelector(".cityButton");
+
 var APIkey = "7d1a630efe515812d5181c337b746a9f";
 
 //Uses latitude and longitude values from coordinates funtion to search API for weather
@@ -45,7 +45,7 @@ function renderCurrentWeather(data) {
     dayOneIconCard.innerHTML = "<img src=" + dayOneWeatherIcon + ">";
     dayOneIconCard.appendChild(currentIcon);
 
-
+    
 }
 
 //Creates weather cards and renders weather for the five day forecast
@@ -92,39 +92,19 @@ function handleInputedCities(cityName) {
     for (let i = 0; i < cityHistory.length; i += 1)
         var eachCity = cityHistory[i];
 
-    var cityButton = document.createElement("button");
+    let cityButton = document.createElement("button");
     cityButton.innerHTML = eachCity;
     pastHistory.appendChild(cityButton);
     cityButton.setAttribute("class", "cityButton");
-    console.log(cityButton.textContent)
-}
 
-//Past search history buttons can be clicked to quickly retrieve weather forecast
-function searchHistory() {
-    var cityName = cityBtn.textContent;
-    console.log(cityName)
-    if (!cityName) return;
-    handleInputedCities();
-
-    var coordinates_API = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIkey;
-
-    fetch(coordinates_API)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            if (!data.length)
-                return alert("No data for " + cityName);
-            var { name, lat, lon } = data[0];
-            getWeatherDetails(name, lat, lon)
-        }).catch(function (error) {
-        });
+    // cityButton.addEventListener("click", getCityCoordinates());
+      
 }
 
 //Uses inputed city name to retrieve latitude and longitude data from API
 var cityInput = document.getElementById("city-input");
 
-function getCityCoordinates(cityName) {
+function getCityCoordinates() {
     var cityName = cityInput.value.trim();
     if (!cityName) return;
     handleInputedCities();
@@ -147,5 +127,4 @@ function getCityCoordinates(cityName) {
 //Buttons
 searchBtn.addEventListener("click", getCityCoordinates);
 
-cityBtn.addEventListener("click", searchHistory);
 
