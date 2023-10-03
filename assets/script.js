@@ -48,7 +48,6 @@ function renderCurrentWeather(data){
     
 }
 
-
 var fiveDayForecastCards = document.querySelector(".weather-cards");
 function renderFiveDayForcast(data){
             
@@ -68,42 +67,40 @@ function renderFiveDayForcast(data){
                 fiveDays.setAttribute("class", "card");
             }  
         }
+
+
 var pastHistory = document.querySelector("#history");
 
-function printCityButtons(){
-    pastCities = readCitiesFromStorage();
-
-    for (let i = 0; i< pastCities.length; i+=1)
-    var eachCity = pastCities[i];
-
-    var cityButton = document.createElement("button");
-    cityButton.textContent = eachCity;
-    pastHistory.appendChild(cityButton);
-    cityButton.setAttribute("class", "cityButton");
-
-}
-
-function handleInputedCities(){
+function handleInputedCities(cityName){
     var cityName = cityInput.value.trim();
-    console.log(cityName);
-    var pastCities = readCitiesFromStorage();
-    saveCitiesToStorage(cityName);
 
-    printCityButtons();  
-}
+    const localStorageContent = localStorage.getItem('cityHistory');
 
-function saveCitiesToStorage(cityName){
-    localStorage.setItem('city', JSON.stringify(cityName));
-}
-
-function readCitiesFromStorage(pastCities){
-    var pastCities = localStorage.getItem("city");
-    console.log(pastCities);
+    let cityHistory;
+    if (localStorageContent === null){
+        cityHistory = [];
+    } else {
+        cityHistory = JSON.parse(localStorageContent);
     }
 
+    cityHistory.push(cityName);
+    localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
 
-function getCityCoordinates() {
-    var cityName = cityInput.value.trim();
+    for (let i = 0; i< cityHistory.length; i+=1)
+    var eachCity = cityHistory[i];
+
+    var cityButton = document.createElement("button");
+    cityButton.innerHTML = eachCity;
+    pastHistory.appendChild(cityButton);
+    cityButton.setAttribute("class", "cityButton");
+    console.log(cityButton.textContent)
+}
+
+var cityBtn = document.querySelector(".cityButton");
+
+function searchHistory(){
+    var cityName = cityBtn.textContent;
+    console.log(cityName)
     if (!cityName) return;
     handleInputedCities();
 
@@ -123,9 +120,27 @@ function getCityCoordinates() {
 }
 
 
+function getCityCoordinates(cityName) {
+    var cityName = cityInput.value.trim();
+    if (!cityName) return;
+    handleInputedCities();
 
+    var coordinates_API = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIkey;
+
+    fetch(coordinates_API)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            if (!data.length)
+                return alert("No data for " + cityName);
+            var { name, lat, lon } = data[0];
+            getWeatherDetails(name, lat, lon)
+        }).catch(function (error) {
+        });   
+}
 
 searchBtn.addEventListener("click", getCityCoordinates);
 
-
+cityBtn.addEventListener("click", searchHistory);
 
