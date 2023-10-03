@@ -1,5 +1,4 @@
-var searchBtn = document.getElementById("button");
-var cityInput = document.getElementById("city-input");
+var cityBtn = document.querySelector(".cityButton");
 var APIkey = "7d1a630efe515812d5181c337b746a9f";
 
 
@@ -70,6 +69,7 @@ function renderFiveDayForcast(data){
 
 
 var pastHistory = document.querySelector("#history");
+var searchBtn = document.getElementById("button");
 
 function handleInputedCities(cityName){
     var cityName = cityInput.value.trim();
@@ -96,8 +96,6 @@ function handleInputedCities(cityName){
     console.log(cityButton.textContent)
 }
 
-var cityBtn = document.querySelector(".cityButton");
-
 function searchHistory(){
     var cityName = cityBtn.textContent;
     console.log(cityName)
@@ -119,6 +117,7 @@ function searchHistory(){
         });   
 }
 
+var cityInput = document.getElementById("city-input");
 
 function getCityCoordinates(cityName) {
     var cityName = cityInput.value.trim();
