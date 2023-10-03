@@ -1,3 +1,5 @@
+/* Overall page styling */
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -8,6 +10,8 @@
 body {
     background-color: #e1eced;
 }
+
+/* Weather Dashboard Header */
 
 header {
     padding: 30px;
@@ -20,6 +24,8 @@ header {
 header h1 {
     display: inline-block;
 }
+
+/* Styling for the input and search button to left-side of page */
 
 aside {
     display: block;
@@ -57,6 +63,8 @@ input {
     font-size: 20px;
 }
 
+/* Styling for today's weather forecast at top of page */
+
 article {
     width: 75%;
     margin: 20px 20px;
@@ -80,40 +88,45 @@ article {
     padding: 20px;
 }
 
-#today #icon img{
+#today #icon img {
     max-width: 120px;
     margin-top: 15px;
 }
 
-#today #icon h4{
+#today #icon h4 {
     margin-top: -10px;
     text-transform: capitalize;
 }
 
-#five-day h2{
+
+/* Styling for the five day weather forecast */
+
+#five-day h2 {
     font-size: 25px;
     margin: 20px 0;
 }
 
-.weather-cards{
+.weather-cards {
     display: flex;
     gap: 20px;
 }
 
-.weather-cards .card{
+.weather-cards .card {
     list-style: none;
     color: #fff;
     padding: 18px 16px;
     border-radius: 5px;
     background-image: linear-gradient(to bottom right, #a9abb4, #3f4c87);
-    line-height:1.5;
+    line-height: 1.5;
     width: calc(100%/5);
 }
 
-.card img{
+.card img {
     max-width: 70px;
     margin: 5px 0 -12px 0;
 }
+
+/* Styling for the buttons of past searched cities */
 
 .cityButton {
     width: 100%;
@@ -129,5 +142,3 @@ article {
     color: #fff;
     border-radius: 4px;
 }
-
-

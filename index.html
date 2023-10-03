@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
     <title>Weather App</title>
 </head>
+<!-- Weather App Header -->
+
 <body>
     <header>Weather Dashboard</header>
+
+    <!-- Search Area Input and Search History Buttons -->
     <aside>
         <div id="left-container">
             <h2 id="search">Search a City:</h2>
-             <input id="city-input" placeholder="E.g., New York, London, Juneau"/>
-             <button id="button">Search</button>
-       </div>
-       <div id="history"></div>
+            <input id="city-input" placeholder="E.g., New York, London, Juneau" />
+            <button id="button">Search</button>
+        </div>
+        <div id="history"></div>
     </aside>
+    <!-- Current and Future Weather Cards -->
     <article id="weather-data">
         <div id="today">
             <div id=weather-details>
                 <div id="city-name"></div>
             </div>
-                <div id="icon">
-                    <div id="icon-img"></div>
-                    <h4 id="weather-condition"></h4>
-                </div>
+            <div id="icon">
+                <div id="icon-img"></div>
+                <h4 id="weather-condition"></h4>
             </div>
+        </div>
         <div id="five-day">
             <h2>5-day Forecast</h2>
-                <div class="weather-cards">
-                </div> 
+            <div class="weather-cards">
+            </div>
     </article>
     <script src="./assets/script.js"></script>
 </body>
+
 </html>
