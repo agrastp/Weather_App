@@ -4,14 +4,16 @@ var APIkey = "7d1a630efe515812d5181c337b746a9f";
 document.addEventListener("DOMContentLoaded", () => {
     let localStorageContent = localStorage.getItem('cityHistory');
     localStorageContent = JSON.parse(localStorageContent);
+    
+    if (localStorageContent) {
+        for (let i = 0; i < localStorageContent.length; i++) {
+            var eachCity = localStorageContent[i];
 
-    for (let i = 0; i < localStorageContent.length; i++) {
-        var eachCity = localStorageContent[i];
-
-        let cityButton = document.createElement("button");
-        cityButton.innerHTML = eachCity;
-        pastHistory.appendChild(cityButton);
-        cityButton.setAttribute("class", "cityButton");
+            let cityButton = document.createElement("button");
+            cityButton.innerHTML = eachCity;
+            pastHistory.appendChild(cityButton);
+            cityButton.setAttribute("class", "cityButton");
+        }
     }
 
     let btns = document.querySelectorAll(".cityButton");
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (i of btns) {
         i.addEventListener('click', function () {
             var cityName = this.innerHTML
-            var coordinates_API = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIkey;
+            var coordinates_API = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIkey;
 
             fetch(coordinates_API)
                 .then(function (response) {
@@ -144,7 +146,7 @@ function getCityCoordinates() {
     if (!cityName) return;
     handleInputedCities();
 
-    var coordinates_API = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIkey;
+    var coordinates_API = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIkey;
 
     fetch(coordinates_API)
         .then(function (response) {
