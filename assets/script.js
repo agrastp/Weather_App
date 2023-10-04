@@ -1,26 +1,40 @@
-
 var APIkey = "7d1a630efe515812d5181c337b746a9f";
-
-
+//Gets cities from local storage and creates a button.  When button is pressed, the city is searched.  
 
 document.addEventListener("DOMContentLoaded", () => {
     let localStorageContent = localStorage.getItem('cityHistory');
     localStorageContent = JSON.parse(localStorageContent);
-    // console.log((localStorageContent.length));
-    // console.log(JSON.parse(localStorageContent));
 
-    for (let i = 0; i < localStorageContent.length; i++){
+    for (let i = 0; i < localStorageContent.length; i++) {
         var eachCity = localStorageContent[i];
 
         let cityButton = document.createElement("button");
         cityButton.innerHTML = eachCity;
         pastHistory.appendChild(cityButton);
         cityButton.setAttribute("class", "cityButton");
-
-
     }
-});
 
+    let btns = document.querySelectorAll(".cityButton");
+
+    for (i of btns) {
+        i.addEventListener('click', function () {
+            var cityName = this.innerHTML
+            var coordinates_API = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIkey;
+
+            fetch(coordinates_API)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    if (!data.length)
+                        return alert("No data for " + cityName);
+                    var { name, lat, lon } = data[0];
+                    getWeatherDetails(name, lat, lon)
+                }).catch(function (error) {
+                });
+        })
+    }
+})
 
 //Uses latitude and longitude values from coordinates funtion to search API for weather
 function getWeatherDetails(cityName, lat, lon) {
@@ -30,7 +44,7 @@ function getWeatherDetails(cityName, lat, lon) {
             return response.json();
         })
         .then(function (data) {
-           
+
             renderCurrentWeather(data);
             renderFiveDayForcast(data);
         })
@@ -66,16 +80,13 @@ function renderCurrentWeather(data) {
     var currentIcon = document.createElement("img");
     dayOneIconCard.innerHTML = "<img src=" + dayOneWeatherIcon + ">";
     dayOneIconCard.appendChild(currentIcon);
-
- 
-
 }
 
 //Creates weather cards and renders weather for the five day forecast
 
 var fiveDayForecastCards = document.querySelector(".weather-cards");
 function renderFiveDayForcast(data) {
-      fiveDayForecastCards.innerHTML = "";
+    fiveDayForecastCards.innerHTML = "";
     for (let i = 0; i < data.list.length; i += 8) {
         var currentDayWeather = data.list[i];
         var date = currentDayWeather.dt_txt.split(" ")[0];
@@ -88,15 +99,15 @@ function renderFiveDayForcast(data) {
 
         var fiveDays = document.createElement("div");
         fiveDays.innerHTML = date + "<br> Temp: " + Math.round(temperature) + " °F <br> Wind: " + wind + " mph <br> Humidity: " + humidity + " % <br>" + weatherCondition + "<br><br>" + weatherIconSrc;
-      
+
         fiveDayForecastCards.appendChild(fiveDays);
         fiveDays.setAttribute("class", "card");
     }
 }
 
 //Puts search history into local storage and creates a button for each city searched
-var pastHistory = document.querySelector("#history");
 var searchBtn = document.getElementById("button");
+var pastHistory = document.querySelector("#history");
 
 function handleInputedCities() {
 
@@ -115,12 +126,12 @@ function handleInputedCities() {
     localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
 
     for (let i = 0; i < cityHistory.length; i += 1)
-            var eachCity = cityHistory[i];
+        var eachCity = cityHistory[i];
 
-        let cityButton = document.createElement("button");
-        cityButton.innerHTML = eachCity;
-        pastHistory.appendChild(cityButton);
-        cityButton.setAttribute("class", "cityButton");     
+    let cityButton = document.createElement("button");
+    cityButton.innerHTML = eachCity;
+    pastHistory.appendChild(cityButton);
+    cityButton.setAttribute("class", "cityButton");
 }
 
 
@@ -150,7 +161,3 @@ function getCityCoordinates() {
 
 //Buttons
 searchBtn.addEventListener("click", getCityCoordinates);
-
-
-
-
