@@ -9,7 +9,7 @@ N/A
 
 ## Usage
 
-This application can be used to determine the weather forecast for any city within a 5-day frame.  Help it to determine weekly plans and plan your days accordingly.
+This application can be used to determine the weather forecast for any city within a 5-day frame.  Use it to determine your weekly plans and plan your days accordingly.
 
 ![Webpage Example](./assets/weather_App.png?raw=true "Webpage Example")
 
